@@ -25,3 +25,9 @@ def load_and_preprocess_image(image_path: str) -> np.ndarray:
         return img_array
     except Exception as e:
         raise ValueError(f"No se pudo procesar la imagen: {e}")
+
+# src/image_processor.py
+
+# 👇 al final del archivo
+preprocess_image = load_and_preprocess_image
+

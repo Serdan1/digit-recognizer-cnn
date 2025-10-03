@@ -36,5 +36,6 @@ class TestDigitPredictor(unittest.TestCase):
 
     def test_predict_raises_if_not_loaded(self):
         p = DigitPredictor("model.h5")
-        with self.assertRaises(RuntimeError):
+        with self.assertRaises(ValueError):
             p.predict(np.random.rand(1, 28, 28, 1).astype("float32"))
+
