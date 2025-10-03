@@ -10,6 +10,8 @@ class TestDigitModel(unittest.TestCase):
         x_train = x_train.astype('float32') / 255.0
         x_train = tf.expand_dims(x_train, -1)[:100]  # Usar solo 100 muestras para test rápido
         y_train = y_train[:100]
+        self.x_train = x_train  # Añadido: self. para acceso en otros métodos
+        self.y_train = y_train  # Añadido: self. para acceso en otros métodos
 
     def test_model_build(self):
         """Verifica que el modelo se construya correctamente."""
@@ -17,8 +19,8 @@ class TestDigitModel(unittest.TestCase):
         self.assertEqual(len(self.model.model.layers), 8)
 
     def test_model_train(self):
-        """Verifica que el modelo se entrene con accuracy > 0.95."""
-        history = self.model.model.fit(x_train, y_train, epochs=1, verbose=0)
+        """Verifica que el modelo se entrene con accuracy > 0.90."""
+        history = self.model.model.fit(self.x_train, self.y_train, epochs=1, verbose=0)
         accuracy = history.history['accuracy'][-1]
         self.assertGreaterEqual(accuracy, 0.90, "Accuracy debería ser al menos 0.90 tras 1 epoch")
 
