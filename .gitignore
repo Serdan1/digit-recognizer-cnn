@@ -1,0 +1,14 @@
+# Archivos de compilación
+bin/
+obj/
+*.suo
+*.user
+.vs/
+
+# Archivos de dependencias
+node_modules/
+*.lock
+
+# Archivos de caché
+*.cache
+*.log
