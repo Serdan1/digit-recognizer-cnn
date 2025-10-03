@@ -12,3 +12,9 @@ node_modules/
 # Archivos de caché
 *.cache
 *.log
+
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.h5  # Puedes quitar si quieres versionar el modelo, pero es grande

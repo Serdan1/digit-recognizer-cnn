@@ -1,0 +1,8 @@
+tensorflow
+keras  # Viene con TF, pero por si acaso
+firebase-admin
+numpy
+pillow
+matplotlib
+pyrebase4  # Opcional, pero lo incluyo
+tkinterdnd2
