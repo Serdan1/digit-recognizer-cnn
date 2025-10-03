@@ -1,5 +1,5 @@
 {
-    "python.analysis.extraPaths": [
-        "./.venv/Lib/site-packages"
-    ]
+    "python.languageServer": "Default",
+    "python.analysis.typeCheckingMode": "off",
+    "python.analysis.diagnosticMode": "openFilesOnly"
 }
