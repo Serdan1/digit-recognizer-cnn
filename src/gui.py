@@ -1,8 +1,11 @@
 # src/gui.py
 import tkinter as tk
 from tkinter import filedialog, messagebox
+from tkinterdnd2 import TkinterDnD, DND_FILES
 from PIL import Image, ImageDraw
 import numpy as np
+import webbrowser
+
 from src.predictor import DigitPredictor
 from src.image_processor import preprocess_image
 from src.firebase_utils import FirebaseUploader
@@ -10,7 +13,8 @@ from src.firebase_utils import FirebaseUploader
 
 class DigitRecognizerGUI:
     def __init__(self, model_path="model.h5", firebase_cred=None, firebase_bucket=None):
-        self.window = tk.Tk()
+        # TkinterDnD permite drag & drop
+        self.window = TkinterDnD.Tk()
         self.window.title("Reconocimiento de Dígitos - MNIST")
         self.window.geometry("400x550")
         self.window.configure(bg="#f5f5f5")
@@ -36,9 +40,13 @@ class DigitRecognizerGUI:
         self.canvas.pack(pady=10)
         self.canvas.bind("<B1-Motion>", self.draw)
 
-        # Imagen PIL para dibujar encima
+        # Imagen PIL para dibujar
         self.image = Image.new("L", (280, 280), color=255)
         self.draw_pil = ImageDraw.Draw(self.image)
+
+        # Habilitar drag & drop en la ventana
+        self.window.drop_target_register(DND_FILES)
+        self.window.dnd_bind('<<Drop>>', self.on_drop)
 
         # Botones
         btn_frame = tk.Frame(self.window, bg="#f5f5f5")
@@ -53,12 +61,12 @@ class DigitRecognizerGUI:
         self.result_label.pack(pady=10)
 
         # URL Firebase
-        self.url_label = tk.Label(self.window, text="", font=("Helvetica", 9), fg="blue", bg="#f5f5f5", wraplength=380, cursor="hand2")
+        self.url_label = tk.Label(self.window, text="", font=("Helvetica", 9), fg="blue", bg="#f5f5f5", wraplength=380, cursor="arrow")
         self.url_label.pack(pady=5)
 
     def draw(self, event):
         x, y = event.x, event.y
-        r = 8  # Radio del pincel
+        r = 8
         self.canvas.create_oval(x - r, y - r, x + r, y + r, fill="black", outline="black")
         self.draw_pil.ellipse([x - r, y - r, x + r, y + r], fill=0)
 
@@ -71,8 +79,14 @@ class DigitRecognizerGUI:
 
     def load_image(self):
         file_path = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg *.jpeg *.png")])
-        if not file_path:
-            return
+        if file_path:
+            self.process_image(file_path)
+
+    def on_drop(self, event):
+        file_path = event.data.strip().strip("{}")
+        self.process_image(file_path)
+
+    def process_image(self, file_path):
         try:
             img_array = preprocess_image(file_path)
             prediction = self.predictor.predict(img_array)
@@ -82,31 +96,17 @@ class DigitRecognizerGUI:
             if self.firebase:
                 url = self.firebase.upload_image(file_path)
                 self.show_url(url)
-
         except Exception as e:
             messagebox.showerror("Error", f"No se pudo procesar la imagen: {e}")
 
     def predict(self):
-        # Guardar dibujo temporalmente
         temp_path = "temp_draw.jpg"
         self.image.save(temp_path)
-        img_array = preprocess_image(temp_path)
-        prediction = self.predictor.predict(img_array)
-        self.result_label.config(text=str(prediction))
-
-        # Subir a Firebase si está disponible
-        if self.firebase:
-            url = self.firebase.upload_image(temp_path)
-            self.show_url(url)
+        self.process_image(temp_path)
 
     def show_url(self, url):
-        """Muestra la URL en la etiqueta y permite abrirla en navegador al hacer clic."""
         self.url_label.config(text=url, fg="blue", cursor="hand2")
-        self.url_label.bind("<Button-1>", lambda e: self.open_url(url))
-
-    def open_url(self, url):
-        import webbrowser
-        webbrowser.open_new(url)
+        self.url_label.bind("<Button-1>", lambda e: webbrowser.open_new(url))
 
     def run(self):
         self.window.mainloop()
