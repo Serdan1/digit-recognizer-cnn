@@ -109,6 +109,7 @@ digit-recognizer-cnn/
 
 
 ## Diagrama del Funcionamiento del Sistema
+```mermaid
 flowchart TD
   A[👤 Usuario] -->|Dibuja o carga imagen| B[🖼️ GUI Tkinter]
   B -->|Preprocesar imagen| C[🧪 image_processor.py]
