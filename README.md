@@ -109,15 +109,14 @@ digit-recognizer-cnn/
 
 
 ## Diagrama del Funcionamiento del Sistema
-```mermaid
-graph LR
-  A[Usuario] -->|Dibuja o carga imagen| B[GUI (Tkinter)]
-  B -->|Preprocesar imagen| C[image_processor.py]
-  C --> D[predictor.py]
-  D -->|Predicción| E["Modelo CNN (model.h5)"]
+flowchart TD
+  A[👤 Usuario] -->|Dibuja o carga imagen| B[🖼️ GUI Tkinter]
+  B -->|Preprocesar imagen| C[🧪 image_processor.py]
+  C --> D[🤖 predictor.py]
+  D -->|Predicción| E["📊 Modelo CNN (model.h5)"]
   E --> D
   D --> B
   B -->|Mostrar resultado| A
 
-  B -->|Subir imagen| F[(Firebase Storage)]
+  B -->|Subir imagen| F[(☁️ Firebase Storage)]
   F -->|URL pública| B
