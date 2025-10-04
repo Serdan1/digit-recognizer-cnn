@@ -49,7 +49,7 @@ Este proyecto implementa una aplicación de reconocimiento de dígitos manuscrit
 
 ## Uso
 1. Ejecuta la aplicación:
-  python -m src.dashboard
+  python main.py
 
 2. **Cargar una imagen**:
 - Haz clic en "Cargar Imagen", selecciona una imagen (p. ej., `images/images_digito_1.png`) en formato PNG o JPG.
@@ -111,13 +111,13 @@ digit-recognizer-cnn/
 ## Diagrama del Funcionamiento del Sistema
 ```mermaid
 flowchart TD
-    A[👤 Usuario] -->|Dibuja o Carga Imagen| B[🖼️ GUI Tkinter]
-    B -->|Preprocesar imagen| C[🧪 image_processor.py]
-    C --> D[🤖 predictor.py]
-    D -->|Predicción| E[📊 Modelo CNN (model.h5)]
-    E --> D
-    D --> B
-    B -->|Mostrar resultado| A
+  A[Usuario] -->|Dibuja o carga imagen| B[GUI (Tkinter)]
+  B -->|Preprocesar imagen| C[image_processor.py]
+  C --> D[predictor.py]
+  D -->|Predicción| E["Modelo CNN (model.h5)"]
+  E --> D
+  D --> B
+  B -->|Mostrar resultado| A
 
-    B -->|Subir imagen| F[(☁️ Firebase Storage)]
-    F -->|URL pública| B
+  B -->|Subir imagen| F[(Firebase Storage)]
+  F -->|URL pública| B
