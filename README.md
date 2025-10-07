@@ -31,7 +31,7 @@ La interfaz gráfica está desarrollada con Tkinter y extendida con tkinterdnd2 
   - `tkinterdnd2` (para drag-and-drop en Tkinter)
 - Una cuenta de Firebase con credenciales (`firebase-credentials.json`) configurada.
 
-- pip install -r requirements.txt
+pip install -r requirements.txt
 
 ## Instalación
 
@@ -40,12 +40,9 @@ La interfaz gráfica está desarrollada con Tkinter y extendida con tkinterdnd2 
 2. Clona el repositorio:
    git clone https://github.com/Serdan1/proyecto-mnist-dashboard.git
    cd proyecto-mnist-dashboard
-   pip install tensorflow keras firebase-admin numpy pillow matplotlib pyrebase4 tkinterdnd2
-
 3. Configura Firebase:
 - Ve a la consola de Firebase, selecciona tu proyecto, y genera un archivo de servicio (`firebase-credentials.json`).
 - Coloca este archivo en la carpeta `config/` del proyecto.
-
 
 
 ### Generar el modelo
