@@ -15,32 +15,6 @@ Este proyecto es un sistema de reconocimiento de dígitos basado en el conjunto 
 - **Herramientas de Depuración**: Scripts para evaluar el modelo y depurar el preprocesamiento de imágenes.
 - **Pruebas Unitarias**: Tests para componentes clave (modelo, predictor, procesador de imágenes, cargador de Firebase y GUI).
 
-## Estructura del Proyecto
-
-├── .vscode/
-│   └── settings.json           # Configuraciones de VS Code para Python
-├── models/
-│   └── best_model.h5          # Mejor modelo guardado durante el entrenamiento
-├── scripts/
-│   ├── debug_single_image.py  # Depura el preprocesamiento y predicción de una sola imagen
-│   ├── eval_model_on_mnist.py # Evalúa el modelo en el conjunto de prueba de MNIST
-│   └── train_model.py         # Entrena el modelo CNN en MNIST
-├── src/
-│   ├── firebase_utils.py      # Utilidades para subir imágenes a Firebase Storage
-│   ├── gui.py                 # Interfaz gráfica de usuario con Tkinter
-│   ├── image_processor.py     # Preprocesamiento de imágenes para compatibilidad con MNIST
-│   ├── model.py               # Definición y entrenamiento del modelo CNN
-│   └── predictor.py           # Lógica de predicción de dígitos
-├── tests/
-│   ├── test_firebase_utils.py # Pruebas unitarias para el cargador de Firebase
-│   ├── test_gui.py            # Pruebas unitarias para la inicialización de la GUI
-│   ├── test_image_processor.py# Pruebas unitarias para el procesador de imágenes
-│   ├── test_model.py          # Pruebas unitarias para el entrenamiento y guardado del modelo
-│   └── test_predictor.py      # Pruebas unitarias para el predictor de dígitos
-├── main.py                    # Punto de entrada para lanzar la GUI
-├── requirements.txt           # Dependencias del proyecto
-└── README.md                  # Documentación del proyecto
-
 
 ## Requisitos
 
