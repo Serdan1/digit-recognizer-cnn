@@ -73,10 +73,12 @@ Este proyecto es un sistema de reconocimiento de dígitos basado en el conjunto 
 4. **Configurar Firebase**:
 - Crea un proyecto en console.firebase.google.com.
 - Habilita Firebase Storage.
-- Genera una clave de cuenta de servicio (JSON) y    colócala en la raíz del proyecto (por ejemplo, proyecto-mnist-dashboard-firebase-adminsdk-fbsvc-57d1f6e9be.json).
+- Genera una clave de cuenta de servicio (JSON) y    colócala en la raíz del proyecto.
 - Asegúrate de que las rutas de firebase_cred y firebase_bucket en main.py y src/gui.py sean correctas.
 
+
 ## Uso
+
 1. **Entrenar el Modelo**:
 - Para entrenar el modelo CNN en el conjunto de datos MNIST:
    python scripts/train_model.py
@@ -112,6 +114,7 @@ Este proyecto es un sistema de reconocimiento de dígitos basado en el conjunto 
 
 
 ## Proprocesamiento de Imágenes 
+
 - El módulo src/image_processor.py preprocesa imágenes para que coincidan con el formato MNIST:
       1. Convierte a escala de grises (0-255).
       2. Invierte si el fondo es claro (intensidad media > 127).
@@ -124,7 +127,9 @@ Este proyecto es un sistema de reconocimiento de dígitos basado en el conjunto 
       9. Centra el dígito en un lienzo de 28x28 usando el centro de masa.
       10. Normaliza los valores de píxeles a [0,1] y da forma (1, 28, 28, 1).
 
+
 ## Arquitectura del Modelo
+
 - El modelo CNN (src/model.py y scripts/train_model.py) consta de:
    * Entrada: Imágenes en escala de grises (28, 28, 1)
    * Capas:
@@ -140,13 +145,17 @@ Este proyecto es un sistema de reconocimiento de dígitos basado en el conjunto 
    * Pérdida: Entropía cruzada categórica dispersa
    * Métrica: Precisión
 
+
 ## Integración con Firebase
+
 - El módulo src/firebase_utils.py gestiona la subida de imágenes a Firebase Storage:
    * Inicializa Firebase con una clave de cuenta de servicio.
    * Sube imágenes al bucket especificado con un nombre de archivo que incluye una marca de tiempo.
    * Devuelve una URL pública para la imagen subida.
 
+
 ## Notas
+
 * Credenciales de Firebase: Asegúrate de que la ruta de firebase_cred apunte a un archivo JSON de cuenta de servicio válido y que firebase_bucket coincida con tu bucket de Firebase Storage.
 * Archivo del Modelo: La GUI y los scripts de predicción requieren que model.h5 exista. Entrena el modelo primero si no está presente.
 * Depuración: Usa debug_single_image.py para inspeccionar el preprocesamiento de imágenes y las predicciones.
@@ -159,16 +168,13 @@ Este proyecto es un sistema de reconocimiento de dígitos basado en el conjunto 
 graph TD
     A[Usuario] -->|Dibuja/Carga/Arrastra| B[GUI Tkinter]
     B -->|Preprocesa imagen| C[image_processor.py]
-    C -->|Array (1,28,28,1)| D[predictor.py]
+    C -->|"Array 1,28,28,1"| D[predictor.py]
     D -->|Consulta/Inference| E[Modelo CNN - model.h5]
     E -->|Predicción| D
     D -->|Resultado| B
     B -->|Sube imagen| F[Firebase Storage]
     F -->|URL pública| B
     B -->|Muestra respuesta| A
-
-
-
 
 
 
