@@ -141,6 +141,8 @@ flowchart TD
     D -->|Resultado| B
     B -->|Sube imagen| F[Firebase Storage]
     F -->|URL pública| B
+    B -->|Muestra respuesta en GUI| A
+
 
 
 
