@@ -90,16 +90,16 @@ Este proyecto es un sistema de reconocimiento de dígitos basado en el conjunto 
 ## Proprocesamiento de Imágenes 
 
 - El módulo src/image_processor.py preprocesa imágenes para que coincidan con el formato MNIST:
-      1. Convierte a escala de grises (0-255).
-      2. Invierte si el fondo es claro (intensidad media > 127).
-      3. Aplica autocontraste para mejorar la separación.
-      4. Usa un desenfoque gaussiano para reducir artefactos de redimensionamiento.
-      5. Aplica umbralización de Otsu para binarizar.
-      6. Dilata para engrosar trazos finos.
-      7. Recorta al cuadro delimitador del dígito.
-      8. Escala proporcionalmente para que el lado máximo sea de 20 píxeles.
-      9. Centra el dígito en un lienzo de 28x28 usando el centro de masa.
-      10. Normaliza los valores de píxeles a [0,1] y da forma (1, 28, 28, 1).
+    1. Convierte a escala de grises (0-255).
+    2. Invierte si el fondo es claro (intensidad media > 127).
+    3. Aplica autocontraste para mejorar la separación.
+    4. Usa un desenfoque gaussiano para reducir artefactos de redimensionamiento.
+    5. Aplica umbralización de Otsu para binarizar.
+    6. Dilata para engrosar trazos finos.
+    7. Recorta al cuadro delimitador del dígito.
+    8. Escala proporcionalmente para que el lado máximo sea de 20 píxeles.
+    9. Centra el dígito en un lienzo de 28x28 usando el centro de masa.
+    10. Normaliza los valores de píxeles a [0,1] y da forma (1, 28, 28, 1).
 
 
 ## Arquitectura del Modelo
