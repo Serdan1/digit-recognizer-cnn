@@ -73,12 +73,12 @@ Este proyecto es un sistema de reconocimiento de dígitos basado en el conjunto 
 - Para lanzar la interfaz gráfica:
    python main.py
 - Funcionalidades:
- - Dibuja dígitos en el lienzo con el ratón.
- - Haz clic en "Predecir" para predecir el dígito dibujado.
- - Haz clic en "Cargar Imagen" para cargar una imagen desde un archivo.
- - Arrastra y suelta una imagen en la ventana.
- - Haz clic en "Limpiar" para borrar el lienzo.
- - Si Firebase está configurado, las imágenes se suben y se muestra una URL pública clickable.
+    - Dibuja dígitos en el lienzo con el ratón.
+    - Haz clic en "Predecir" para predecir el dígito dibujado.
+    - Haz clic en "Cargar Imagen" para cargar una imagen desde un archivo.
+    - Arrastra y suelta una imagen en la ventana.
+    - Haz clic en "Limpiar" para borrar el lienzo.
+    - Si Firebase está configurado, las imágenes se suben y se muestra una URL pública clickable.
 - Requisitos: Asegúrate de que model.h5 exista (entrena el modelo primero si es necesario) y que las credenciales de Firebase estén configuradas.
 
 5. **Ejecutar Pruebas Unitarias**:
