@@ -1,14 +1,22 @@
 # Proyecto MNIST Dashboard
 
 ## Descripción
-Este proyecto implementa una aplicación de reconocimiento de dígitos manuscritos utilizando una Red Neuronal Convolucional (CNN) entrenada con el dataset MNIST. La aplicación permite cargar, arrastrar o pintar imágenes de dígitos dibujados (por ejemplo, en Paint), predecir el número mediante un modelo de TensorFlow/Keras, y subir las imágenes a Firebase Storage con una URL pública. La interfaz gráfica está desarrollada con Tkinter, extendida con `tkinterdnd2` para soportar drag-and-drop. 
+Este proyecto implementa una aplicación de reconocimiento de dígitos manuscritos utilizando una Red Neuronal Convolucional (CNN) entrenada con el dataset MNIST. La aplicación permite cargar, arrastrar o pintar imágenes de dígitos dibujados (por ejemplo, hechos en Paint), procesarlas automáticamente y obtener una predicción precisa..
+
+Además, las imágenes procesadas se suben automáticamente a Firebase Storage, obteniendo una URL pública.
+
+La interfaz gráfica está desarrollada con Tkinter y extendida con tkinterdnd2 para permitir drag-and-drop de imágenes directamente en la ventana.
 
 ## Características
-- Predicción de dígitos manuscritos con una CNN entrenada (precisión de validación ~97.45% con 3 épocas).
-- Interfaz gráfica interactiva con soporte para drag-and-drop y carga manual.
-- Subida automática de imágenes a Firebase Storage con URL accesible.
-- Depuración integrada con mensajes en consola para facilitar el desarrollo.
-- Umbral de confianza ajustable (actualmente 0.2) para validar predicciones.
+- Predicción de dígitos manuscritos con una CNN entrenada (precisión MNIST 97-98%).
+- Interfaz gráfica interactiva con:
+   Lienzo para dibujar números.
+   Carga manual de imágenes.
+   soporte de arrastrar y soltar (Drag & Drop).
+- Integración con Firebase Storage para almacenar y compartir imágenes mediante URLs públicas.
+- Preprocesamiento robusto de imágenes (binarización, centrado, escalado proporcional).
+- Mensajes de depuración en consola para facilitar el desarrollo y diagnóstico
+
 
 ## Requisitos
 - **Python 3.8 o superior**
@@ -23,6 +31,8 @@ Este proyecto implementa una aplicación de reconocimiento de dígitos manuscrit
   - `tkinterdnd2` (para drag-and-drop en Tkinter)
 - Una cuenta de Firebase con credenciales (`firebase-credentials.json`) configurada.
 
+- pip install -r requirements.txt
+
 ## Instalación
 
 ### Clonar el repositorio
@@ -35,30 +45,29 @@ Este proyecto implementa una aplicación de reconocimiento de dígitos manuscrit
 3. Configura Firebase:
 - Ve a la consola de Firebase, selecciona tu proyecto, y genera un archivo de servicio (`firebase-credentials.json`).
 - Coloca este archivo en la carpeta `config/` del proyecto.
-4. Verifica las instalaciones:
-   pip show tensorflow
-   pip show tkinterdnd2
+
 
 
 ### Generar el modelo
-1. Ejecuta el script principal para entrenar y guardar el modelo:
-  python main.py
-2. Verifica que `models/modelo_digitos.h5` se cree:
-  dir models
+1. Entrenar el modelo
+- python scripts/train_model.py
+Esto descargará MNIST, entrenará una CNN (32-64-64 filters + Dense) y guardará el modelo como: model.h5
+2. Evaluar el modelo 
+- python scripts/eval_model_on_mnist.py
+  Si es correcto verás: MNIST test accuracy: 0.97...
+
 
 
 ## Uso
 1. Ejecuta la aplicación:
   python main.py
-
-2. **Cargar una imagen**:
-- Haz clic en "Cargar Imagen", selecciona una imagen (p. ej., `images/images_digito_1.png`) en formato PNG o JPG.
-- La interfaz mostrará el dígito predicho y la URL de Firebase tras subirla.
-3. **Arrastrar y soltar**:
-- Arrastra una imagen (p. ej., `im2.png`) dentro de la interfaz.
-4. **Dibujar imagen**:
-- Puedes dibujar un número y darle a predecir para que se identifique el número dibujado 
-4. Haz click en la URL generada y se abrirá en un navegador la imagen subida o dibujada.
+2. Dibujar un número en el canvas y hacer clic en “Predecir”.
+   → Se mostrará el dígito reconocido y se subirá a Firebase.
+3. Cargar imagen desde tu equipo:
+   Haz clic en “Cargar Imagen” y selecciona un .png o .jpg.
+4. Arrastrar y soltar imágenes sobre la ventana.
+   Ideal para imágenes hechas en Paint u otro editor.
+5. Abrir la URL generada para ver la imagen en  Firebase Storage.
   
 
 ## Estructura del Proyecto
@@ -70,6 +79,10 @@ digit-recognizer-cnn/
 │ ├── image_processor.py # Procesamiento de imágenes
 │ ├── firebase_utils.py # Integración con Firebase Storage
 │ ├── model.py # Definición y entrenamiento del modelo CNN
+├── scripts/
+│   ├── train_model.py        # Entrena y guarda model.h5
+│   └── eval_model_on_mnist.py # Evalúa el modelo en el dataset oficial MNIST
+    └── edebug_single_image.py # Evalúa el modelo en con una imagen, como un test
 │
 ├── tests/
 │ ├── test_model.py # Tests del modelo
@@ -82,9 +95,10 @@ digit-recognizer-cnn/
 └── README.md
 
 ## Desempeño
-- El modelo CNN fue entrenado con 3 épocas, alcanzando una precisión de validación del 97.45% en el dataset MNIST.
-- El tiempo de predicción por imagen es ~74ms en una CPU estándar (SSE3, AVX2 habilitados).
-- La subida a Firebase depende de la conexión a internet (típicamente <1s).
+- Precisión modelo CNN (MNIST test): ~97–98% tras 5–10 épocas.
+- Tiempo de predicción: ~70 ms por imagen en CPU estándar.
+- Subida Firebase: depende de conexión (<1 s normalmente).
+- Procesamiento imagen personalizada: centrado + binarización → mejora notablemente la precisión con dibujos externos.
 
 
 ## Contribución
@@ -100,24 +114,31 @@ digit-recognizer-cnn/
 
 
 ## Notas de Desarrollador
-- El modelo usa una CNN con capas convolucionales, pooling, y fully connected.
-- La función de activación ReLU y el softmax se han aplicado.
-- El dropout (0.25) se usa para mitigar overfitting.
-- La depuración con `print()` en la consola indica cada etapa (inicialización, predicción, subida).
-- El umbral de confianza (0.2) es ajustable en `procesar_imagen()` para tolerar imágenes ruidosas.
+- El pipeline de preprocesamiento adapta las imágenes externas para que se asemejen a los dígitos MNIST:
+      Fondo negro / dígito blanco.
+      Escalado proporcional a 20px.
+      Centrado en base al centro de masa.
+- El modelo utiliza ReLU en convolucionales y softmax en la salida.
+- No se utiliza dropout en la versión final (puedes añadirlo fácilmente para robustez extra).
+- Se imprimen los Top 3 resultados en consola para depurar casos ambiguos.
 
 
 
 ## Diagrama del Funcionamiento del Sistema
 ```mermaid
 flowchart TD
-  A[👤 Usuario] -->|Dibuja o carga imagen| B[🖼️ GUI Tkinter]
-  B -->|Preprocesar imagen| C[🧪 image_processor.py]
-  C --> D[🤖 predictor.py]
-  D -->|Predicción| E["📊 Modelo CNN (model.h5)"]
-  E --> D
-  D --> B
-  B -->|Mostrar resultado| A
+  A["👤 Usuario"] -->|Dibuja / Carga / Arrastra imagen| B["🖼 GUI Tkinter"]
+    B -->|Preprocesar imagen| C["🧪 image_processor.py"]
+    C --> D["🤖 predictor.py"]
+    D -->|Predicción| E["📊 Modelo CNN (model.h5)"]
+    E --> D
+    D --> B
+    B -->|Mostrar resultado| A
 
-  B -->|Subir imagen| F[(☁️ Firebase Storage)]
-  F -->|URL pública| B
+    B -->|Subir imagen| F["☁️ Firebase Storage"]
+    F -->|URL pública| B
+
+##Proyecto finalizado y funcional:
+- CNN correctamente entrenada
+- Predicciones precisas con imágenes externas
+- GUI interactiva con Firebase integrada
