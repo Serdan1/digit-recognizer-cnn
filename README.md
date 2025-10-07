@@ -69,33 +69,29 @@ Esto descargará MNIST, entrenará una CNN (32-64-64 filters + Dense) y guardar�
 
 ## Estructura del Proyecto
 
-```plaintext
-digit-recognizer-cnn/
-├── .venv/                                    # Entorno virtual
-├── .vscode/                                  # Configuración de VS Code
-├── models/                                   # Modelos guardados (best_model.h5, etc.)
+├── .vscode/
+│   └── settings.json           # Configuraciones de VS Code para Python
+├── models/
+│   └── best_model.h5          # Mejor modelo guardado durante el entrenamiento
 ├── scripts/
-│   ├── train_model.py                        # Entrena y guarda model.h5
-│   ├── eval_model_on_mnist.py                # Evalúa el modelo en MNIST
-│   └── debug_single_image.py                 # Evalúa el modelo con una imagen (debug)
+│   ├── debug_single_image.py  # Depura el preprocesamiento y predicción de una sola imagen
+│   ├── eval_model_on_mnist.py # Evalúa el modelo en el conjunto de prueba de MNIST
+│   └── train_model.py         # Entrena el modelo CNN en MNIST
 ├── src/
-│   ├── gui.py                                # Interfaz gráfica (Tkinter)
-│   ├── predictor.py                          # Carga del modelo y realiza predicciones
-│   ├── image_processor.py                    # Procesamiento de imágenes
-│   ├── firebase_utils.py                     # Integración con Firebase Storage
-│   └── model.py                              # Definición y entrenamiento del modelo CNN
+│   ├── firebase_utils.py      # Utilidades para subir imágenes a Firebase Storage
+│   ├── gui.py                 # Interfaz gráfica de usuario con Tkinter
+│   ├── image_processor.py     # Preprocesamiento de imágenes para compatibilidad con MNIST
+│   ├── model.py               # Definición y entrenamiento del modelo CNN
+│   └── predictor.py           # Lógica de predicción de dígitos
 ├── tests/
-│   ├── test_model.py                         # Tests para el modelo
-│   ├── test_predictor.py                     # Tests para el predictor
-│   └── test_gui.py                           # Tests para la GUI
-├── proyecto-mnist-dashboard-firebase-adminsdk-...json  # Credenciales (NO dejar en repo público)
-├── main.py                                   # Punto de entrada para ejecutar la GUI
-├── requirements.txt                          # Dependencias del proyecto
-├── model.h5                                  # Modelo principal
-├── test_model.h5                             # Modelo de prueba
-├── debug_processed.png                       # Imagen procesada para debug
-├── temp_draw.jpg                             # Imagen temporal para dibujo
-└── README.md                                 # Documentación del proyecto
+│   ├── test_firebase_utils.py # Pruebas unitarias para el cargador de Firebase
+│   ├── test_gui.py            # Pruebas unitarias para la inicialización de la GUI
+│   ├── test_image_processor.py# Pruebas unitarias para el procesador de imágenes
+│   ├── test_model.py          # Pruebas unitarias para el entrenamiento y guardado del modelo
+│   └── test_predictor.py      # Pruebas unitarias para el predictor de dígitos
+├── main.py                    # Punto de entrada para lanzar la GUI
+├── requirements.txt           # Dependencias del proyecto
+└── README.md                  # Documentación del proyecto
 
 
 ## Desempeño

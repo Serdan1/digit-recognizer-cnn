@@ -1,8 +1,8 @@
 tensorflow
-keras  # Viene con TF, pero por si acaso
+keras  
 firebase-admin
 numpy
 pillow
 matplotlib
-pyrebase4  # Opcional, pero lo incluyo
+pyrebase4  
 tkinterdnd2
