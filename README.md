@@ -71,10 +71,12 @@ Esto descargará MNIST, entrenará una CNN (32-64-64 filters + Dense) y guardar�
   
 
 ## Estructura del Proyecto
+
+```plaintext
 digit-recognizer-cnn/
-├── .venv/                                    # entorno virtual
-├── .vscode/
-├── models/                                   # modelos guardados (best_model.h5, etc.)
+├── .venv/                                    # Entorno virtual
+├── .vscode/                                  # Configuración de VS Code
+├── models/                                   # Modelos guardados (best_model.h5, etc.)
 ├── scripts/
 │   ├── train_model.py                        # Entrena y guarda model.h5
 │   ├── eval_model_on_mnist.py                # Evalúa el modelo en MNIST
@@ -86,17 +88,17 @@ digit-recognizer-cnn/
 │   ├── firebase_utils.py                     # Integración con Firebase Storage
 │   └── model.py                              # Definición y entrenamiento del modelo CNN
 ├── tests/
-│   ├── test_model.py
-│   ├── test_predictor.py
-│   └── test_gui.py
-├── proyecto-mnist-dashboard-firebase-adminsdk-...json  # credenciales (NO dejar en repo público)
+│   ├── test_model.py                         # Tests para el modelo
+│   ├── test_predictor.py                     # Tests para el predictor
+│   └── test_gui.py                           # Tests para la GUI
+├── proyecto-mnist-dashboard-firebase-adminsdk-...json  # Credenciales (NO dejar en repo público)
 ├── main.py                                   # Punto de entrada para ejecutar la GUI
-├── requirements.txt
-├── model.h5
-├── test_model.h5
-├── debug_processed.png
-├── temp_draw.jpg
-└── README.md
+├── requirements.txt                          # Dependencias del proyecto
+├── model.h5                                  # Modelo principal
+├── test_model.h5                             # Modelo de prueba
+├── debug_processed.png                       # Imagen procesada para debug
+├── temp_draw.jpg                             # Imagen temporal para dibujo
+└── README.md                                 # Documentación del proyecto
 
 
 ## Desempeño
