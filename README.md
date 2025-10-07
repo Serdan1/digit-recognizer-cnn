@@ -144,9 +144,6 @@ flowchart TD
     B -->|Muestra respuesta en GUI| A
 
 
-
-
-
 ##Proyecto finalizado y funcional:
 - CNN correctamente entrenada
 - Predicciones precisas con imágenes externas
