@@ -133,15 +133,15 @@ digit-recognizer-cnn/
 
 ```mermaid
 flowchart TD
-    A[👤 Usuario] -->|Dibuja/Carga/Arrastra imagen| B[🖼 GUI Tkinter]
-    B -->|Preprocesa imagen| C[🧪 image_processor.py]
-    C --> D[🤖 predictor.py]
-    D -->|Realiza predicción| E[📊 Modelo CNN - model.h5]
+    A[Usuario] -->|Dibuja / Carga / Arrastra| B[GUI Tkinter]
+    B -->|Preprocesa imagen| C[image_processor.py]
+    C -->|Array (1,28,28,1)| D[predictor.py]
+    D -->|Consulta / Inference| E[Modelo CNN (model.h5)]
     E --> D
-    D -->|Muestra resultado| B
-    B -->|Sube imagen| F[☁️ Firebase Storage]
-    F -->|Devuelve URL| B
-    B -->|Muestra resultado| A
+    D -->|Resultado| B
+    B -->|Sube imagen| F[Firebase Storage]
+    F -->|URL pública| B
+
 
 ##Proyecto finalizado y funcional:
 - CNN correctamente entrenada
