@@ -146,6 +146,7 @@ flowchart TD
 
 
 
+
 ##Proyecto finalizado y funcional:
 - CNN correctamente entrenada
 - Predicciones precisas con imágenes externas
