@@ -133,7 +133,7 @@ digit-recognizer-cnn/
 
 ```mermaid
 graph TD
-    A[Usuario] -->|Dibuja/Carga/Arrastra| B[GUI Tkinter]
+    A -->[Usuario] -->|Dibuja/Carga/Arrastra| B[GUI Tkinter]
     B -->|Preprocesa imagen| C[image_processor.py]
     C -->|"Array 1,28,28,1"| D[predictor.py]
     D -->|Consulta/Inference| E[Modelo CNN - model.h5]
