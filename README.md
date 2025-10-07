@@ -135,12 +135,13 @@ digit-recognizer-cnn/
 flowchart TD
     A[Usuario] -->|Dibuja / Carga / Arrastra| B[GUI Tkinter]
     B -->|Preprocesa imagen| C[image_processor.py]
-    C -->|Array (1,28,28,1)| D[predictor.py]
-    D -->|Consulta / Inference| E[Modelo CNN (model.h5)]
+    C -->|"Array (1,28,28,1)"| D[predictor.py]
+    D -->|Consulta / Inference| E[Modelo CNN - model.h5]
     E --> D
     D -->|Resultado| B
     B -->|Sube imagen| F[Firebase Storage]
     F -->|URL pública| B
+
 
 
 ##Proyecto finalizado y funcional:
