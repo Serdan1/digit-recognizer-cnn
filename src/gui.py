@@ -88,7 +88,13 @@ class DigitRecognizerGUI:
 
     def process_image(self, file_path):
         try:
-            img_array = preprocess_image(file_path)
+            debug_path = "debug_processed.png"
+            img_array = preprocess_image(file_path, debug_save_path=debug_path)
+            # Mostrar stats rápidas
+            arr = img_array[0, :, :, 0]
+            print(f"DEBUG: {file_path} -> shape={img_array.shape} min={arr.min():.3f} max={arr.max():.3f} mean={arr.mean():.3f} nonzero={(arr>0.05).sum()}")
+            print(f"DEBUG: imagen procesada guardada en {debug_path}")
+
             prediction = self.predictor.predict(img_array)
             self.result_label.config(text=str(prediction))
 
@@ -98,6 +104,7 @@ class DigitRecognizerGUI:
                 self.show_url(url)
         except Exception as e:
             messagebox.showerror("Error", f"No se pudo procesar la imagen: {e}")
+
 
     def predict(self):
         temp_path = "temp_draw.jpg"
