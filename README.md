@@ -128,22 +128,21 @@ digit-recognizer-cnn/
 - Se imprimen los Top 3 resultados en consola para depurar casos ambiguos.
 
 
-## Diagrama de Flujo
-
-```mermaid
-graph TD
-    A[Usuario] -->|Dibuja/Carga/Arrastra| B[GUI Tkinter]
-    B -->|Preprocesa imagen| C[image_processor.py]
-    C -->|"Array 1,28,28,1"| D[predictor.py]
-    D -->|Consulta/Inference| E[Modelo CNN - model.h5]
-    E -->|Predicción| D
-    D -->|Resultado| B
-    B -->|Sube imagen| F[Firebase Storage]
-    F -->|URL pública| B
-    B -->|Muestra respuesta| A
-
-
-##Proyecto finalizado y funcional:
+## Proyecto finalizado y funcional:
 - CNN correctamente entrenada
 - Predicciones precisas con imágenes externas
 - GUI interactiva con Firebase integrada
+
+
+## Diagrama de Flujo
+
+```mermaid
+flowchart TD
+    A["👤 Usuario"] -->|Dibuja / Carga / Arrastra| B["🖼 GUI Tkinter"]
+    B -->|Preprocesa imagen| C["🧪 image_processor.py"]
+    C -->|Array (1,28,28,1)| D["🤖 predictor.py"]
+    D -->|Consulta / Inference| E["📊 Modelo CNN (model.h5)"]
+    E --> D
+    D -->|Resultado| B
+    B -->|Sube imagen| F["☁ Firebase Storage"]
+    F -->|URL pública| B
