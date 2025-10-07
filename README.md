@@ -69,6 +69,7 @@ Esto descargará MNIST, entrenará una CNN (32-64-64 filters + Dense) y guardar�
 
 ## Estructura del Proyecto
 
+```plaintext
 ├── .vscode/
 │   └── settings.json           # Configuraciones de VS Code para Python
 ├── models/
