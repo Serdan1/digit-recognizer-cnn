@@ -72,24 +72,32 @@ Esto descargará MNIST, entrenará una CNN (32-64-64 filters + Dense) y guardar�
 
 ## Estructura del Proyecto
 digit-recognizer-cnn/
-├── src/
-│   ├── gui.py                     # Interfaz gráfica (Tkinter)
-│   ├── predictor.py               # Carga del modelo y realiza predicciones
-│   ├── image_processor.py         # Procesamiento de imágenes
-│   ├── firebase_utils.py          # Integración con Firebase Storage
-│   ├── model.py                  # Definición y entrenamiento del modelo CNN
+├── .venv/                                    # entorno virtual
+├── .vscode/
+├── models/                                   # modelos guardados (best_model.h5, etc.)
 ├── scripts/
-│   ├── train_model.py            # Entrena y guarda el modelo (model.h5)
-│   ├── eval_model_on_mnist.py    # Evalúa el modelo en el dataset oficial MNIST
-│   ├── debug_single_image.py     # Evalúa el modelo con una sola imagen (pruebas)
+│   ├── train_model.py                        # Entrena y guarda model.h5
+│   ├── eval_model_on_mnist.py                # Evalúa el modelo en MNIST
+│   └── debug_single_image.py                 # Evalúa el modelo con una imagen (debug)
+├── src/
+│   ├── gui.py                                # Interfaz gráfica (Tkinter)
+│   ├── predictor.py                          # Carga del modelo y realiza predicciones
+│   ├── image_processor.py                    # Procesamiento de imágenes
+│   ├── firebase_utils.py                     # Integración con Firebase Storage
+│   └── model.py                              # Definición y entrenamiento del modelo CNN
 ├── tests/
-│   ├── test_model.py             # Tests para el modelo
-│   ├── test_predictor.py         # Tests para las predicciones
-│   ├── test_gui.py               # Tests para la interfaz gráfica
-├── proyecto-mnist-dashboard-firebase-adminsdk-fbsvc-57d1f6e9be.json  # Credenciales de Firebase
-├── main.py                       # Punto de entrada para ejecutar la GUI
-├── requirements.txt              # Dependencias del proyecto
-└── README.md                     # Documentación del proyecto
+│   ├── test_model.py
+│   ├── test_predictor.py
+│   └── test_gui.py
+├── proyecto-mnist-dashboard-firebase-adminsdk-...json  # credenciales (NO dejar en repo público)
+├── main.py                                   # Punto de entrada para ejecutar la GUI
+├── requirements.txt
+├── model.h5
+├── test_model.h5
+├── debug_processed.png
+├── temp_draw.jpg
+└── README.md
+
 
 ## Desempeño
 - Precisión modelo CNN (MNIST test): ~97–98% tras 5–10 épocas.
@@ -124,15 +132,15 @@ digit-recognizer-cnn/
 ## Diagrama del Funcionamiento del Sistema
 ```mermaid
 flowchart TD
-    A[👤 Usuario] -->|Dibuja/Carga/Arrastra imagen| B[🖼 GUI Tkinter]
-    B -->|Preprocesa imagen| C[🧪 image_processor.py]
-    C --> D[🤖 predictor.py]
-    D -->|Realiza predicción| E[📊 Modelo CNN - model.h5]
+    A[Usuario] -->|Dibuja / Carga / Arrastra| B[GUI Tkinter]
+    B -->|Preprocesa imagen| C[image_processor.py]
+    C -->|Array (1,28,28,1)| D[predictor.py]
+    D -->|Consulta / Inference| E[Modelo CNN (model.h5)]
     E --> D
-    D -->|Muestra resultado| B
-    B -->|Sube imagen| F[☁️ Firebase Storage]
-    F -->|Devuelve URL| B
-    B -->|Muestra resultado| A
+    D -->|Resultado| B
+    B -->|Sube imagen| F[Firebase Storage]
+    F -->|URL pública| B
+
 
 ##Proyecto finalizado y funcional:
 - CNN correctamente entrenada
