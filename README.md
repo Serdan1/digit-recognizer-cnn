@@ -2,6 +2,14 @@
 
 Este proyecto es un sistema de reconocimiento de dígitos basado en el conjunto de datos MNIST. Incluye un modelo de red neuronal convolucional (CNN) para clasificar dígitos, una interfaz gráfica de usuario (GUI) para reconocimiento en tiempo real, e integración con Firebase para almacenar imágenes. El sistema permite a los usuarios dibujar dígitos, cargar imágenes o arrastrarlas y soltarlas para predecir dígitos (0-9) y, opcionalmente, subirlas a Firebase Storage.
 
+
+## 🚀 Ejecuta el sistema
+
+Haz clic en el siguiente enlace para probar el modelo de reconocimiento de dígitos en línea:
+
+👉 [**Haz clic aquí para ejecutar el sistema**](https://danserrano1-digit-recognizer-cnn.hf.space/)
+
+
 ## Características
 
 - **Entrenamiento del Modelo**: Entrena un modelo CNN con el conjunto de datos MNIST para reconocer dígitos escritos a mano.
