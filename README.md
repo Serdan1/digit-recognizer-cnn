@@ -1,8 +1,8 @@
-Reconocimiento de Dígitos - MNIST
+# Reconocimiento de Dígitos - MNIST
 
 Este proyecto es un sistema de reconocimiento de dígitos basado en el conjunto de datos MNIST. Incluye un modelo de red neuronal convolucional (CNN) para clasificar dígitos, una interfaz gráfica de usuario (GUI) para reconocimiento en tiempo real, e integración con Firebase para almacenar imágenes. El sistema permite a los usuarios dibujar dígitos, cargar imágenes o arrastrarlas y soltarlas para predecir dígitos (0-9) y, opcionalmente, subirlas a Firebase Storage.
 
-🌐 Demostración en Línea
+## 🌐 Demostración en Línea
 
 Puedes probar el sistema directamente en Hugging Face Spaces sin necesidad de instalación local:
 
@@ -10,139 +10,145 @@ Puedes probar el sistema directamente en Hugging Face Spaces sin necesidad de in
 
 Este espacio está integrado con el repositorio de GitHub y carga automáticamente el modelo entrenado y la interfaz para el reconocimiento de dígitos.
 
-🚀 Ejecuta el sistema localmente
+
+## 🚀 Ejecuta el sistema localmente
 
 Si prefieres ejecutarlo en tu equipo:
 
-Clona el repositorio e instala las dependencias.
+   - Clona el repositorio e instala las dependencias.
 
-Configura las credenciales de Firebase (opcional).
+   - Configura las credenciales de Firebase (opcional).
 
-Ejecuta el script principal:
+   - Ejecuta el script principal:
 
-python main.py
+         - python main.py
 
-Características
 
-Entrenamiento del Modelo: Entrena un modelo CNN con el conjunto de datos MNIST para reconocer dígitos escritos a mano.
+## Características
 
-Interfaz Gráfica (GUI): Basada en Tkinter con soporte para arrastrar y soltar:
+- Entrenamiento del Modelo: Entrena un modelo CNN con el conjunto de datos MNIST para reconocer dígitos escritos a mano.
 
-Dibuja dígitos en un lienzo.
+- Interfaz Gráfica (GUI): Basada en Tkinter con soporte para arrastrar y soltar:
 
-Carga imágenes desde archivos.
+- Dibuja dígitos en un lienzo.
 
-Predice dígitos con el modelo entrenado.
+- Carga imágenes desde archivos.
 
-Sube imágenes a Firebase Storage y obtiene una URL pública.
+- Predice dígitos con el modelo entrenado.
 
-Procesamiento de Imágenes: Adapta las imágenes al formato MNIST (28x28, escala de grises, normalizado).
+- Sube imágenes a Firebase Storage y obtiene una URL pública.
 
-Integración con Firebase: Guarda las imágenes y obtiene sus URLs públicas.
+- Procesamiento de Imágenes: Adapta las imágenes al formato MNIST (28x28, escala de grises, normalizado).
 
-Pruebas Unitarias y Herramientas de Depuración: Validan los componentes y ayudan en el desarrollo.
+- Integración con Firebase: Guarda las imágenes y obtiene sus URLs públicas.
 
-Requisitos
+- Pruebas Unitarias y Herramientas de Depuración: Validan los componentes y ayudan en el desarrollo.
 
-Python 3.8 o superior
 
-Dependencias (ver requirements.txt):
+## Requisitos
 
-tensorflow>=2.0
+- Python 3.8 o superior
 
-keras>=2.0
+- Dependencias (ver requirements.txt):
 
-firebase-admin>=6.0
+- tensorflow>=2.0
 
-numpy>=1.19
+- keras>=2.0
 
-pillow>=8.0
+- firebase-admin>=6.0
 
-matplotlib>=3.3
+- numpy>=1.19
 
-pyrebase4>=4.5 (opcional, para compatibilidad con Firebase)
+- pillow>=8.0
 
-tkinterdnd2>=0.3 (para funcionalidad de arrastrar y soltar)
+- matplotlib>=3.3
 
-Un proyecto de Firebase con Storage habilitado y un archivo JSON de credenciales de servicio
+- pyrebase4>=4.5 (opcional, para compatibilidad con Firebase)
 
-Instalación
+- tkinterdnd2>=0.3 (para funcionalidad de arrastrar y soltar)
 
-Clonar el repositorio:
+- Un proyecto de Firebase con Storage habilitado y un archivo JSON de credenciales de servicio
+
+
+## Instalación
+
+- Clonar el repositorio:
 
 git clone <url-del-repositorio>
 cd reconocimiento-digitos-mnist
 
 
-Crear un entorno virtual (opcional, pero recomendado):
+- Crear un entorno virtual (opcional, pero recomendado):
 
 python -m venv venv
 source venv/bin/activate  # En Windows: venv\Scripts\activate
 
 
-Instalar las dependencias:
+- Instalar las dependencias:
 
 pip install -r requirements.txt
 
 
-Configurar Firebase:
+- Configurar Firebase:
 
 Crea un proyecto en console.firebase.google.com
 .
 
-Habilita Firebase Storage.
+- Habilita Firebase Storage.
 
 Genera una clave de cuenta de servicio (JSON) y colócala en la raíz del proyecto.
 
 Asegúrate de que las rutas de firebase_cred y firebase_bucket en main.py y src/gui.py sean correctas.
 
-Uso
 
-Entrenar el Modelo:
+## Uso
+
+- Entrenar el Modelo:
 
 python scripts/train_model.py
 
 
-Evaluar el Modelo:
+- Evaluar el Modelo:
 
 python scripts/eval_model_on_mnist.py
 
 
-Depurar una Imagen Individual:
+- Depurar una Imagen Individual:
 
 python scripts/debug_single_image.py ruta/a/imagen.jpg
 
 
-Ejecutar la GUI:
+- Ejecutar la GUI:
 
 python main.py
 
-
-Ejecutar Pruebas Unitarias:
+- Ejecutar Pruebas Unitarias:
 
 python -m unittest discover tests
 
-Procesamiento de Imágenes
+
+## Procesamiento de Imágenes
 
 El módulo src/image_processor.py adapta las imágenes al formato MNIST mediante:
 
-Conversión a escala de grises.
+   - Conversión a escala de grises.
 
-Inversión si el fondo es claro.
+   - Inversión si el fondo es claro.
 
-Autocontraste y desenfoque gaussiano.
+   - Autocontraste y desenfoque gaussiano.
 
-Umbralización (Otsu).
+   - Umbralización (Otsu).
 
-Detección y recorte del dígito.
+   - Detección y recorte del dígito.
 
-Redimensionamiento proporcional (máx. 20px por lado).
+   - Redimensionamiento proporcional (máx. 20px por lado).
 
-Centrado en lienzo 28x28.
+   - Centrado en lienzo 28x28.
 
-Normalización [0,1].
+   - Normalización [0,1].
 
-🧠 Arquitectura del Modelo
+
+## 🧠 Arquitectura del Modelo
 
 El modelo CNN (en src/model.py) consta de:
 
@@ -156,21 +162,34 @@ Flatten	—	—
 Dense	64 unidades	ReLU
 Dense	10 unidades	Softmax
 
-Optimizador: Adam
-Pérdida: Entropía cruzada categórica dispersa
-Métrica: Precisión
+- Optimizador: Adam
+- Pérdida: Entropía cruzada categórica dispersa
+- Métrica: Precisión
 
-🔥 Integración con Firebase
+
+## 🔥 Integración con Firebase
 
 El módulo src/firebase_utils.py permite subir imágenes procesadas a Firebase Storage:
 
-Inicializa Firebase con una cuenta de servicio.
+- Inicializa Firebase con una cuenta de servicio.
 
-Sube las imágenes con un nombre único (marca de tiempo).
+- Sube las imágenes con un nombre único (marca de tiempo).
 
-Devuelve una URL pública para acceso directo.
+- Devuelve una URL pública para acceso directo.
 
-🧩 Diagrama de Flujo
+
+## Notas
+
+- Asegúrate de que model.h5 exista antes de lanzar la GUI (entrena el modelo si no está presente).
+
+- Las credenciales de Firebase deben ser válidas y apuntar al bucket configurado.
+
+- Las pruebas unitarias requieren un modelo válido para ejecutarse correctamente.
+
+
+## 🧩 Diagrama de Flujo
+
+```mermaid
 graph TD
     A[Usuario] -->|Dibuja/Carga/Arrastra| B[GUI Tkinter]
     B -->|Preprocesa imagen| C[image_processor.py]
@@ -182,10 +201,3 @@ graph TD
     F -->|URL pública| B
     B -->|Muestra respuesta| A
 
-Notas
-
-Asegúrate de que model.h5 exista antes de lanzar la GUI (entrena el modelo si no está presente).
-
-Las credenciales de Firebase deben ser válidas y apuntar al bucket configurado.
-
-Las pruebas unitarias requieren un modelo válido para ejecutarse correctamente.
