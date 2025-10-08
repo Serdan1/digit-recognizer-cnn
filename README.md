@@ -152,15 +152,17 @@ El módulo src/image_processor.py adapta las imágenes al formato MNIST mediante
 
 El modelo CNN (en src/model.py) consta de:
 
-Tipo de Capa	Parámetros	Activación
-Conv2D	32 filtros (3x3)	ReLU
-MaxPooling2D	(2x2)	—
-Conv2D	64 filtros (3x3)	ReLU
-MaxPooling2D	(2x2)	—
-Conv2D	64 filtros (3x3)	ReLU
-Flatten	—	—
-Dense	64 unidades	ReLU
-Dense	10 unidades	Softmax
+| **Tipo de Capa** | **Parámetros**   | **Activación** |
+| ---------------- | ---------------- | -------------- |
+| Conv2D           | 32 filtros (3x3) | ReLU           |
+| MaxPooling2D     | (2x2)            | —              |
+| Conv2D           | 64 filtros (3x3) | ReLU           |
+| MaxPooling2D     | (2x2)            | —              |
+| Conv2D           | 64 filtros (3x3) | ReLU           |
+| Flatten          | —                | —              |
+| Dense            | 64 unidades      | ReLU           |
+| Dense            | 10 unidades      | Softmax        |
+
 
 - Optimizador: Adam
 - Pérdida: Entropía cruzada categórica dispersa
