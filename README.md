@@ -6,7 +6,7 @@ Este proyecto es un sistema de reconocimiento de dígitos basado en el conjunto 
 
 Puedes probar el sistema directamente en Hugging Face Spaces sin necesidad de instalación local:
 
-👉 Haz clic aquí para ejecutar el sistema
+👉 [Haz clic aquí para ejecutar el sistema](https://danserrano1-digit-recognizer-cnn.hf.space/)
 
 Este espacio está integrado con el repositorio de GitHub y carga automáticamente el modelo entrenado y la interfaz para el reconocimiento de dígitos.
 
